@@ -1,0 +1,23 @@
+---
+- name: Clone Browbeat
+  git: "repo=https://github.com/openstack/browbeat dest={{ browbeat_home }}/browbeat"
+
+- name: Copy Browbeat Install Variables
+  copy: "remote_src=true src={{ browbeat_home }}/browbeat/ci-scripts/config/tripleo/install-and-check/all.yml dest={{ browbeat_home }}/browbeat/ansible/install/group_vars/all.yml"
+
+- name: Copy Browbeat Config
+  copy: "remote_src=true src={{ browbeat_home }}/browbeat/ci-scripts/config/browbeat-ci.yaml dest={{ browbeat_home }}/browbeat/browbeat-config.yaml"
+
+- name: Generate Browbeat Hosts File
+  shell: "pushd {{ browbeat_home }}/browbeat/ansible/; ./generate_tripleo_hostfile.sh localhost $HOME/.ssh/config; popd"
+
+- name: Install Ansible
+  pip: name=ansible state=latest
+  become: true
+
+- name: Install Browbeat
+  shell: "pushd {{ browbeat_home }}/browbeat/ansible/; ansible-playbook -i hosts install/browbeat.yml; popd"
+
+- name: Install Browbeat Networks
+  shell: "pushd {{ browbeat_home }}/browbeat/ansible/; ansible-playbook -i hosts install/browbeat_network.yml"
+

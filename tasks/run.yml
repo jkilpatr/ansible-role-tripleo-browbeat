@@ -1,0 +1,5 @@
+---
+#Run Browbeat
+
+- name: Run Browbeat
+  shell: "source {{ browbeat_home }}/browbeat-venv/bin/activate; pushd {{ browbeat_home }}/browbeat/; python browbeat.py rally; popd"

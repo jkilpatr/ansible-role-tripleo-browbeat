@@ -1,0 +1,5 @@
+---
+#Browbeat Gather
+
+- name: Run Browbeat Gather
+  shell: "pushd {{ browbeat_home }}/browbeat/ansible/; ansible-playbook -i hosts gather/site.yml; popd"

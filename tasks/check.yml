@@ -1,0 +1,5 @@
+---
+#Browbeat Checks
+
+- name: Run Browbeat Checks
+  shell: "pushd {{ browbeat_home }}/browbeat/ansible; ansible-playbook -i hosts check/site.yml; popd"

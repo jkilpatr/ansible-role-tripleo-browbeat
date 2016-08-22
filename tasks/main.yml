@@ -1,0 +1,13 @@
+---
+
+- include: install.yml
+  tags: browbeat-install
+   
+- include: check.yml
+  tags: browbeat-check
+
+- include: gather.yml
+  tags: browbeat-gather
+
+- include: run.yml
+  tags: browbeat-run
