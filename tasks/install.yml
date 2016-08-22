@@ -12,7 +12,7 @@
   shell: "pushd {{ browbeat_home }}/browbeat/ansible/; ./generate_tripleo_hostfile.sh localhost $HOME/.ssh/config; popd"
 
 - name: Install Ansible
-  pip: name=ansible state=latest
+  pip: name=ansible state=present
   become: true
 
 - name: Install Browbeat
